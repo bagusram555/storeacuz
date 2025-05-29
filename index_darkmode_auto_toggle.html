@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<!-- Di dalam <head> -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Acuz Store - Batik Buton</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f1f5f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      color: #2563eb;
+      font-size: 24px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #2563eb;
+    }
+
+    .hero {
+      background: linear-gradient(to right, #e0f2fe, #ffffff);
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .hero h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    .products {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .products h3 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 40px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .product-info p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 16px;
+      font-weight: bold;
+      color: #2563eb;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      background-color: #2563eb;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #1d4ed8;
+    }
+    
+    .search-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.search-section input {
+  width: 80%;
+  max-width: 400px;
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.contact {
+  background-color: #ffffff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.contact h3 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.contact ul {
+  list-style: none;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffffff;
+      border-top: 1px solid #e5e7eb;
+      color: #777;
+      font-size: 14px;
+    }
+
+    @media (max-width: 500px) {
+      .hero h2 {
+        font-size: 24px;
+      }
+
+      .products h3 {
+        font-size: 22px;
+      }
+    }
+  
+.btn {
+  background-color: #2563eb;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  margin: 4px;
+}
+.btn:hover {
+  background-color: #1d4ed8;
+}
+
+body::before {
+  content: "";
+  background: url('background_acuzstore.png') no-repeat center center/cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(8px);
+  z-index: -1;
+  opacity: 0.6;
+}
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById('dark-toggle');
+    const body = document.body;
+
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark-mode');
+    }
+
+    toggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
+  });
+</script>
+<style>
+  body.dark-mode {
+    background-color: #1e293b !important;
+    color: #f1f5f9 !important;
+  }
+  body.dark-mode header,
+  body.dark-mode footer,
+  body.dark-mode .contact {
+    background-color: #0f172a !important;
+    color: #f1f5f9 !important;
+  }
+  body.dark-mode .product-card {
+    background-color: #334155 !important;
+    color: #f1f5f9 !important;
+  }
+  body.dark-mode nav a {
+    color: #f1f5f9 !important;
+  }
+  body.dark-mode .hero {
+    background: linear-gradient(to right, #1e293b, #0f172a) !important;
+  }
+</style>
+</head>
+<body><div id="promo-banner" style="background-color:#facc15; color:#000; text-align:center; padding:12px; font-weight:bold;">🎉 Promo Spesial Hari Ini: Diskon 20% untuk semua layanan! 🎉<button onclick="document.getElementById('promo-banner').style.display='none';" style="margin-left: 10px; padding: 5px 10px; font-size: 14px; cursor: pointer;">Tutup</button></div>
+<!-- Loader -->
+<div id="loader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999; display: flex; justify-content: center; align-items: center;">
+<div class="spinner"></div>
+</div>
+<style>
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 6px solid #3498db;
+  border-top: 6px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
+<script>
+window.addEventListener("load", () => {
+  document.getElementById("loader").style.display = "none";
+});
+</script>
+<header style=" flex-direction: column; align-items: center; gap: 10px;">
+<h1>Acuz Store</h1>
+<button id="menu-toggle" style="display:none; font-size: 24px; background:none; border:none; cursor:pointer;">☰</button>
+<nav id="main-nav" style="flex-wrap: wrap;">
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">Produk</a></li>
+<li><a href="#">Kontak</a></li>
+<li><button id="dark-toggle" style="font-size: 18px; background: none; border: none; cursor: pointer;" title="Toggle Dark Mode">🌙</button></li>
+</ul>
+</nav>
+</header>
+<section class="hero">
+<h2>Selamat Datang di Acuz Store</h2>
+<p>Banyak pilihan produk dan di jamin aman terpercaya!</p>
+</section>
+<section class="search-section">
+<div class="container">
+<input id="searchInput" onkeyup="searchProducts()" placeholder="Cari produk..." type="text"/>
+</div>
+</section>
+<section class="products" id="productSection">
+<div style="text-align:center; margin-bottom:20px;">
+<button class="btn" onclick="filterCategory('all')">Semua</button>
+<button class="btn" onclick="filterCategory('digital')">Digital</button>
+<button class="btn" onclick="filterCategory('layanan')">Layanan</button>
+</div>
+<h3>Produk Unggulan</h3>
+<div class="product-grid" id="productGrid">
+<!-- Produk 1 -->
+<div class="product-card" data-aos="fade-up" data-category="digital" style="position:relative;"><div style="position:absolute; top:10px; left:10px; background:#facc15; color:#000; padding:4px 8px; font-size:12px; font-weight:bold; border-radius:4px;">🔥 Terlaris</div>
+<img alt="Panel BotWa" src="https://source.unsplash.com/300x300/?batik,1"/>
+<div class="product-info">
+<h4>Panel 1gb - Unli</h4>
+<p>Panel Bot Wa Bonus Script Bot Jaga Grub/Pushkontak/Scbug</p>
+<div class="price">Rp1.000-10.000</div>
+<a class="btn" href="https://wa.me/6288298717014?text=Halo%20saya%20ingin%20membeli%20produk%20Panel%201gb%20-%20Unli">Beli Sekarang</a>
+</div>
+</div>
+<!-- Produk 2 -->
+<div class="product-card" data-aos="fade-up" data-category="digital" style="position:relative;"><div style="position:absolute; top:10px; left:10px; background:#facc15; color:#000; padding:4px 8px; font-size:12px; font-weight:bold; border-radius:4px;">🆕 Baru</div>
+<img alt="Nokos ID" src="https://source.unsplash.com/300x300/?batik,2"/>
+<div class="product-info">
+<h4>Nokos Reg Indonesia</h4>
+<p>Harga Terjangkau Dan Pastinya Aman</p>
+<div class="price">Rp5.000</div>
+<a class="btn" href="https://wa.me/6288298717014?text=Halo%20saya%20ingin%20membeli%20produk%20Nokos%20Reg%20Indonesia">Beli Sekarang</a>
+</div>
+</div>
+<!-- Produk 3 -->
+<div class="product-card" data-aos="fade-up" data-category="digital">
+<img alt="Medsos Shop" src="https://source.unsplash.com/300x300/?batik,3"/>
+<div class="product-info">
+<h4>Followers/Like/Views</h4>
+<p>Tersedia Suntik Followers/Like/Views Harga Terjangkau</p>
+<div class="price">Rp1.500-200.000</div>
+<a class="btn" href="https://wa.me/6288298717014?text=Halo%20saya%20ingin%20membeli%20produk%20Followers%2FLike%2FViews">Beli Sekarang</a>
+</div>
+</div>
+<!-- Produk 4 -->
+<div class="product-card" data-aos="fade-up" data-category="layanan">
+<img alt="Murid Bug" src="https://source.unsplash.com/300x300/?batik,4"/>
+<div class="product-info">
+<h4>Murid Bug</h4>
+<p>Bisa Untuk Mengebug Para Riper Dan Bocil Anomali</p>
+<div class="price">Rp5.000</div>
+<a class="btn" href="https://wa.me/6288298717014?text=Halo%20saya%20ingin%20membeli%20produk%20Murid%20Bug">Beli Sekarang</a>
+</div>
+</div>
+<!-- Produk 5 -->
+<div class="product-card" data-aos="fade-up" data-category="layanan">
+<img alt="JasaBuat Website" src="https://source.unsplash.com/300x300/?batik,5"/>
+<div class="product-info">
+<h4>JasButWebsite</h4>
+<p>Bisa request dan tinggal terima beres saja</p>
+<div class="price">Rp20.000</div>
+<a class="btn" href="https://wa.me/6288298717014?text=Halo%20saya%20ingin%20membeli%20produk%20JasButWebsite">Beli Sekarang</a>
+</div>
+</div>
+</div>
+</section>
+<section style="padding: 40px 20px; background: #f9fafb;">
+<h3 style="text-align:center; font-size: 24px; margin-bottom: 20px;">Pesanan Custom</h3>
+<form onsubmit="return sendCustomOrder()" style="max-width: 600px; margin: auto;">
+<input id="custName" placeholder="Nama Anda" required="" style="width:100%;padding:10px;margin-bottom:10px;" type="text"/>
+<input id="custOrder" placeholder="Pesanan Anda" required="" style="width:100%;padding:10px;margin-bottom:10px;" type="text"/>
+<textarea id="custNote" placeholder="Catatan Tambahan" rows="4" style="width:100%;padding:10px;margin-bottom:10px;"></textarea>
+<input id="promoCode" placeholder="Kode Promo (opsional)" style="width:100%;padding:10px;margin-bottom:10px;" type="text"/>
+<button class="btn" type="submit">Kirim ke WhatsApp</button>
+</form>
+</section>
+<script>
+function sendCustomOrder() {
+  const name = document.getElementById("custName").value;
+  const order = document.getElementById("custOrder").value;
+  const note = document.getElementById("custNote").value;
+  const promo = document.getElementById("promoCode").value;
+  let message = \`Halo, saya \${name} ingin memesan: \${order}. \`;
+  if(note) message += "Catatan: " + note + ". ";
+  if(promo) message += "Kode Promo: " + promo;
+  window.open("https://wa.me/6288298717014?text=" + encodeURIComponent(message), "_blank");
+  return false;
+}
+</script>
+<section class="testimonials" style="padding: 40px 20px; background-color: #f8fafc; text-align: center;">
+<h3 style="font-size: 24px; margin-bottom: 24px;">Apa Kata Pelanggan?</h3>
+<div id="testimonial-container" style="max-width: 600px; margin: 0 auto; position: relative;">
+<div class="testimonial-slide" style="font-size: 16px; color: #333;">
+<p>"Pelayanan sangat cepat dan terpercaya, saya puas belanja di sini!"</p>
+<strong>- Andi, Makassar</strong>
+</div>
+<div class="testimonial-slide" style="display: none; font-size: 16px; color: #333;">
+<p>"Produk sesuai deskripsi dan harga terjangkau. Mantap Acuz Store!"</p>
+<strong>- Rina, Jakarta</strong>
+</div>
+<div class="testimonial-slide" style="display: none; font-size: 16px; color: #333;">
+<p>"Langganan beli disini. Admin fast respon dan helpful banget."</p>
+<strong>- Bayu, Surabaya</strong>
+</div>
+</div>
+</section>
+<section class="contact" style="background: url('background_acuzstore.png') no-repeat center center/cover; position: relative; overflow: hidden; color: white;">
+<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 0;"></div>
+<div class="container" style=" position: relative; z-index: 1;">
+<h3>Kontak Kami</h3>
+<p>Jika ada pertanyaan atau pesanan custom, hubungi kami melalui:</p>
+<ul>
+<li><strong>Email:</strong> acuzstore@gmail.com</li>
+<li><strong>WhatsApp:</strong> 0882-9871-7014</li>
+<li><strong>Instagram:</strong> @acuzstore</li>
+<li><button id="dark-toggle" style="font-size: 18px; background: none; border: none; cursor: pointer;" title="Toggle Dark Mode">🌙</button></li>
+</ul>
+</div>
+<div style="margin-top:20px;">
+<iframe allowfullscreen="" height="250" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126926.41232682226!2d122.4621336!3d-5.4684789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9806b123456789%3A0xabcdef123456789!2sButon%2C%20Sulawesi%20Tenggara!5e0!3m2!1sid!2sid!4v1685000000000!5m2!1sid!2sid" style="border:0; border-radius: 10px;" width="100%"></iframe>
+</div>
+</section>
+<section style="padding: 40px 20px; background: #f1f5f9;">
+<h3 style="text-align:center; font-size: 24px; margin-bottom: 20px;">FAQ (Pertanyaan Umum)</h3>
+<div class="faq" style="max-width: 600px; margin: 0 auto;">
+<div>
+<button onclick="toggleFaq(this)" style="width: 100%; text-align: left; font-weight: bold; padding: 10px; border: none; background: #2563eb; color: white; margin-bottom: 5px;">Bagaimana cara membeli produk?</button>
+<div style="display:none; padding: 10px; background: white; border: 1px solid #ddd;">Klik tombol "Beli Sekarang" lalu Anda akan diarahkan ke WhatsApp admin kami.</div>
+</div>
+<div>
+<button onclick="toggleFaq(this)" style="width: 100%; text-align: left; font-weight: bold; padding: 10px; border: none; background: #2563eb; color: white; margin-bottom: 5px;">Apakah semua produk ready?</button>
+<div style="display:none; padding: 10px; background: white; border: 1px solid #ddd;">Ya, semua produk digital tersedia 24 jam.</div>
+</div>
+<div>
+<button onclick="toggleFaq(this)" style="width: 100%; text-align: left; font-weight: bold; padding: 10px; border: none; background: #2563eb; color: white; margin-bottom: 5px;">Berapa lama proses transaksi?</button>
+<div style="display:none; padding: 10px; background: white; border: 1px solid #ddd;">Transaksi diproses dalam hitungan menit selama jam operasional.</div>
+</div>
+</div>
+</section>
+<script>
+function toggleFaq(btn) {
+  const content = btn.nextElementSibling;
+  content.style.display = content.style.display === 'block' ? 'none' : 'block';
+}
+</script>
+<footer>
+    © 2025 Acuz Store. Bee A Smart Buyer.
+  </footer>
+<script>
+  function searchProducts() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.product-card');
+
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(input) ? 'block' : 'none';
+    });
+  }
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
+<a href="https://wa.me/6288298717014" style="position:fixed; bottom:20px; right:20px; z-index:1000;" target="_blank">
+<img alt="Chat WhatsApp" src="https://img.icons8.com/color/48/000000/whatsapp.png" title="Hubungi Kami via WhatsApp"/>
+</a>
+<script>
+function filterCategory(category) {
+  const cards = document.querySelectorAll('.product-card');
+  cards.forEach(card => {
+    if (category === 'all' || card.dataset.category === category) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+<script>
+let slideIndex = 0;
+function showTestimonials() {
+  const slides = document.querySelectorAll(".testimonial-slide");
+  slides.forEach((slide, i) => {
+    slide.style.display = (i === slideIndex) ? "block" : "none";
+  });
+  slideIndex = (slideIndex + 1) % slides.length;
+  setTimeout(showTestimonials, 4000);
+}
+document.addEventListener("DOMContentLoaded", showTestimonials);
+</script>
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" style="position:fixed; bottom:80px; right:20px; z-index:1000; background:#2563eb; color:#fff; border:none; border-radius:50%; width:40px; height:40px; font-size:20px; cursor:pointer;">
+  ↑
+</button>
+<style>
+  @media (max-width: 768px) {
+    nav ul {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+    }
+    nav ul.show {
+      display: flex;
+    }
+    #menu-toggle {
+      display: block;
+    }
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById('menu-toggle');
+    const navLinks = document.querySelector('nav ul');
+    toggleBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  });
+</script>
+<!-- AI Chatbot Widget -->
+<!-- AI Chatbot Widget -->
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/65b6bcf38d261e1b5f5c26a5/1hkm6gfiv';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const body = document.body;
+    if (prefersDark) {
+      body.classList.add('dark-mode');
+    } else {
+      body.classList.remove('dark-mode');
+    }
+  });
+</script>
+</body>
+</html>
