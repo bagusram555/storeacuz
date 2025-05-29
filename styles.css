@@ -1,167 +1,136 @@
-/* Reset dasar */
+/* Font dan reset dasar */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-/* Warna dan font global */
-body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  line-height: 1.6;
 }
 
-/* Navbar */
-.navbar {
-  background-color: #ff6b00;
-  padding: 1rem 2rem;
+body {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.hero {
+  position: relative;
+  background: url('https://wallpapercave.com/wp/wp2037297.jpg') no-repeat center center/cover;
+  height: 100vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   color: white;
-}
-
-.navbar .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.navbar .menu {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.navbar .menu li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.navbar .menu li a:hover {
-  text-decoration: underline;
-}
-
-/* Banner */
-.banner {
-  background: url('https://via.placeholder.com/1200x400/ff6b00/ffffff?text=Promo+Besar') no-repeat center center/cover;
-  text-align: center;
-  color: white;
-  padding: 5rem 2rem;
-}
-
-.banner h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.banner p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-}
-
-.btn-cta {
-  padding: 0.8rem 1.5rem;
-  background-color: white;
-  color: #ff6b00;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-.btn-cta:hover {
-  background-color: #ffe5d1;
-}
-
-/* Produk */
-.produk-section {
-  padding: 3rem 2rem;
   text-align: center;
 }
 
-.produk-section h2 {
-  margin-bottom: 2rem;
-}
-
-.produk-container {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-}
-
-.product {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  overflow: hidden;
-  padding-bottom: 1rem;
-}
-
-.product img {
+.hero .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 1;
 }
 
-.product h3 {
-  margin: 1rem 0 0.5rem;
+.hero-content {
+  position: relative;
+  z-index: 2;
 }
 
-.price {
-  color: #ff6b00;
-  font-weight: bold;
+.hero h1 {
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
-.buy-button {
-  background-color: #ff6b00;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 5px;
-  cursor: pointer;
+.hero h1 span {
+  color: #ffb300;
 }
 
-.buy-button:hover {
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-hero {
+  background: #ffb300;
+  color: #000;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-hero:hover {
+  background: #ffcc40;
+}
+
+/* Produk */
+.produk {
+  padding: 4rem 2rem;
+  background: white;
+  text-align: center;
+}
+
+.produk h2 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #ffb300;
+}
+
+.produk-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.produk-item {
+  background: #fff7e6;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 300px;
+}
+
+.produk-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.deskripsi {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.harga {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ff6b00;
+  margin-bottom: 1rem;
+}
+
+.btn-beli {
+  background-color: #ff6b00;
+  color: white;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.btn-beli:hover {
   background-color: #e65a00;
 }
 
-/* Testimoni */
-.testimoni-section {
-  background-color: #fff8f1;
-  padding: 3rem 2rem;
-  text-align: center;
-}
-
-.testimoni-section h2 {
-  margin-bottom: 2rem;
-}
-
-.testimoni-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-width: 800px;
-  margin: auto;
-}
-
-.testimoni {
-  background-color: white;
-  padding: 1.5rem;
-  border-left: 5px solid #ff6b00;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
 /* Kontak */
-.kontak-section {
+.kontak {
   padding: 3rem 2rem;
   text-align: center;
+  background: #fff3e0;
 }
 
-.kontak-section h2 {
+.kontak h2 {
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -181,21 +150,9 @@ body {
 
 /* Footer */
 footer {
-  background-color: #eee;
-  color: #555;
+  background: #222;
+  color: #ccc;
   text-align: center;
   padding: 1rem;
   font-size: 0.9rem;
-}
-
-/* Responsif */
-@media (max-width: 768px) {
-  .navbar .menu {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .testimoni-container {
-    flex-direction: column;
-  }
 }
