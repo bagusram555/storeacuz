@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Acuz Store - Batik Buton</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -135,6 +136,40 @@
     .btn:hover {
       background-color: #1d4ed8;
     }
+    
+    .search-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.search-section input {
+  width: 80%;
+  max-width: 400px;
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.contact {
+  background-color: #ffffff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.contact h3 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.contact ul {
+  list-style: none;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.8;
+}
 
     footer {
       text-align: center;
@@ -172,10 +207,27 @@
     <h2>Selamat Datang di Acuz Store</h2>
     <p>Banyak pilihan produk dan di jamin aman terpercaya!</p>
   </section>
+  
+  <section class="search-section">
+  <div class="container">
+    <input type="text" id="searchInput" placeholder="Cari produk..." onkeyup="searchProducts()">
+  </div>
+</section>
 
-  <section class="products">
+  <section class="products" id="productSection">
     <h3>Produk Unggulan</h3>
-    <div class="product-grid">
+    <div class="product-grid" id="productGrid">
+    <section class="contact">
+  <div class="container">
+    <h3>Kontak Kami</h3>
+    <p>Jika ada pertanyaan atau pesanan custom, hubungi kami melalui:</p>
+    <ul>
+      <li><strong>Email:</strong> acuzstore@gmail.com</li>
+      <li><strong>WhatsApp:</strong> 0882-9871-7014</li>
+      <li><strong>Instagram:</strong> @acuzstore</li>
+    </ul>
+  </div>
+</section>
       <!-- Produk 1 -->
       <div class="product-card">
         <img src="https://source.unsplash.com/300x300/?batik,1" alt="Panel BotWa">
@@ -236,5 +288,17 @@
   <footer>
     &copy; 2025 Acuz Store. Bee A Smart Buyer.
   </footer>
+  
+  <script>
+  function searchProducts() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.product-card');
+
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(input) ? 'block' : 'none';
+    });
+  }
+</script>
 </body>
 </html>
