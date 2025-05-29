@@ -3,43 +3,199 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AcuzStore - Panel 1GB Unli</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Bagus Rama - Panel Hosting</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #f0f0f0, #e0e0e0);
+      color: #333;
+    }
+
+    header {
+      background-color: #1e3a8a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product h3 {
+      margin-top: 0;
+    }
+
+    .price {
+      color: #1e40af;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 10px;
+      background: #1e3a8a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #3749b6;
+    }
+
+    .cart {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 40px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .total {
+      text-align: right;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .remove-btn {
+      background: transparent;
+      color: red;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="hero">
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <h1>Selamat Datang di <span>AcuzStore</span></h1>
-      <p>Jual Panel 1GB - Unli Murah & Berkualitas</p>
-      <a href="#produk" class="btn-hero">Lihat Produk</a>
+
+<header>
+  <h1>Bagus Rama - Panel Hosting</h1>
+</header>
+
+<div class="container">
+  <div class="products" id="product-list">
+    <!-- Produk akan dimuat dengan JavaScript -->
+  </div>
+
+  <div class="cart" id="cart">
+    <h2>Keranjang Belanja</h2>
+    <div id="cart-items">
+      <p>Keranjang masih kosong.</p>
     </div>
-  </header>
+    <div class="total" id="cart-total"></div>
+  </div>
+</div>
 
-  <!-- Produk -->
-  <section id="produk" class="produk">
-    <h2>Produk Kami</h2>
-    <div class="produk-list">
-      <div class="produk-item">
-        <h3>Panel 1GB - Unlimited</h3>
-        <p class="deskripsi">Cocok untuk kebutuhan hosting bot, web, dan script ringan.</p>
-        <p class="harga">Rp 10.000 / bulan</p>
-        <a href="https://wa.me/6288298717014" class="btn-beli" target="_blank">Beli Sekarang</a>
-      </div>
-    </div>
-  </section>
+<script>
+  const products = [
+    {
+      id: 1,
+      name: \"Starter Hosting Panel\",
+      price: 50000,
+      description: \"Paket dasar untuk website pribadi dan UMKM.\"
+    },
+    {
+      id: 2,
+      name: \"Pro Hosting Panel\",
+      price: 120000,
+      description: \"Solusi hosting untuk website bisnis menengah.\"
+    },
+    {
+      id: 3,
+      name: \"Enterprise Hosting Panel\",
+      price: 250000,
+      description: \"Layanan hosting premium dengan performa tinggi.\"
+    }
+  ];
 
-  <!-- Kontak -->
-  <section class="kontak">
-    <h2>Hubungi Kami</h2>
-    <p>Nomor WhatsApp: <strong>088298717014</strong></p>
-    <a href="https://wa.me/6288298717014" class="btn-wa" target="_blank">Chat via WhatsApp</a>
-  </section>
+  const cart = [];
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 AcuzStore. All rights reserved.</p>
-  </footer>
+  function formatRupiah(amount) {
+    return \"Rp \" + amount.toLocaleString(\"id-ID\");
+  }
+
+  function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    cart.push(product);
+    renderCart();
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    renderCart();
+  }
+
+  function renderProducts() {
+    const list = document.getElementById(\"product-list\");
+    products.forEach(product => {
+      const el = document.createElement(\"div\");
+      el.className = \"product\";
+      el.innerHTML = `
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        <p class=\"price\">${formatRupiah(product.price)}</p>
+        <button onclick=\"addToCart(${product.id})\">Tambah ke Keranjang</button>
+      `;
+      list.appendChild(el);
+    });
+  }
+
+  function renderCart() {
+    const container = document.getElementById(\"cart-items\");
+    const totalBox = document.getElementById(\"cart-total\");
+    container.innerHTML = \"\";
+    if (cart.length === 0) {
+      container.innerHTML = \"<p>Keranjang masih kosong.</p>\";
+      totalBox.innerHTML = \"\";
+      return;
+    }
+    cart.forEach((item, index) => {
+      const el = document.createElement(\"div\");
+      el.className = \"cart-item\";
+      el.innerHTML = `
+        <span>${item.name} - ${formatRupiah(item.price)}</span>
+        <button class=\"remove-btn\" onclick=\"removeFromCart(${index})\">Hapus</button>
+      `;
+      container.appendChild(el);
+    });
+
+    const total = cart.reduce((acc, item) => acc + item.price, 0);
+    totalBox.innerText = \"Total: \" + formatRupiah(total);
+  }
+
+  renderProducts();
+</script>
+
 </body>
 </html>
