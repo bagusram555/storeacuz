@@ -18,7 +18,7 @@
     }
 
     header {
-      background-color: #ffffff;
+      background: #1f2937;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       padding: 20px 40px;
       display: flex;
@@ -80,12 +80,23 @@
     }
 
     .product-grid {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 20px;
+  padding-bottom: 10px;
+}
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
     }
 
     .product-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-width: 280px;
+
       background-color: #fff;
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
@@ -157,7 +168,7 @@
 }
 
 .contact {
-  background-color: #ffffff;
+  background: #1f2937;
   padding: 40px 20px;
   text-align: center;
 }
@@ -177,7 +188,7 @@
     footer {
       text-align: center;
       padding: 20px;
-      background-color: #ffffff;
+      background: #1f2937;
       border-top: 1px solid #e5e7eb;
       color: #777;
       font-size: 14px;
@@ -220,7 +231,23 @@ body::before {
   z-index: -1;
   opacity: 0.6;
 }
-</style>
+
+  position: relative;
+  height: 320px;
+  background: url('file-42nBbkeXWtem1ByB3aBgJP') no-repeat center center/cover;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparan */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}</style>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const toggle = document.getElementById('dark-toggle');
@@ -248,6 +275,10 @@ body::before {
     color: #f1f5f9 !important;
   }
   body.dark-mode .product-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-width: 280px;
+
     background-color: #334155 !important;
     color: #f1f5f9 !important;
   }
@@ -258,13 +289,235 @@ body::before {
     background: linear-gradient(to right, #1e293b, #0f172a) !important;
   }
 </style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<script>
+  NProgress.start();
+  window.addEventListener('load', function () {
+    NProgress.done();
+  });
+</script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<script>
+  NProgress.start();
+  window.addEventListener('load', function () {
+    NProgress.done();
+  });
+</script>
+<link href="manifest.json" rel="manifest"/>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(() => console.log("Service Worker registered."));
+}
+</script>
+<style>
+body, .product-card, .hero, .contact, footer {
+  transition: background-color 0.5s, color 0.5s;
+}
+</style>
+<style>
+.product-card {
+  perspective: 1000px;
+}
+.product-card .inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.product-card:hover .inner {
+  transform: rotateY(180deg);
+}
+.product-card .front, .product-card .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.product-card .back {
+  background: #2563eb;
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+<style>
+body {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+body.loaded {
+  opacity: 1;
+}
+</style>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("loaded");
+  });
+</script>
+<style>
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+</style>
+<style>
+.product-card img:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+</style>
+<style>
+body {
+  background: linear-gradient(120deg, #0f172a, #1e3a8a, #0f172a);
+  background-size: 600% 600%;
+  animation: gradientShift 20s ease infinite;
+}
+@keyframes gradientShift {
+  0% {background-position:0% 50%}
+  50% {background-position:100% 50%}
+  100% {background-position:0% 50%}
+}
+</style>
 </head>
-<body><div id="promo-banner" style="background-color:#facc15; color:#000; text-align:center; padding:12px; font-weight:bold;">🎉 Promo Spesial Hari Ini: Diskon 20% untuk semua layanan! 🎉<button onclick="document.getElementById('promo-banner').style.display='none';" style="margin-left: 10px; padding: 5px 10px; font-size: 14px; cursor: pointer;">Tutup</button></div>
+<body>
+<section style="display:flex;justify-content:center;gap:20px;padding:20px 10px;background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);border-radius:16px;margin:20px;color:white;">
+<div><h4 style="margin:0;">📦 25 Produk</h4><small>Total Aktif</small></div>
+<div><h4 style="margin:0;">⭐ 4.9/5</h4><small>Rating Pelanggan</small></div>
+<div><h4 style="margin:0;">💬 1.200+</h4><small>Pesanan Masuk</small></div>
+</section>
+<div style="position:fixed;top:0;left:0;right:0;background:#facc15;color:#111827;text-align:center;padding:8px;font-weight:bold;z-index:9999;">
+  🚨 Promo Hari Ini: Diskon 20% untuk Semua Produk! Klik <a href="#productSection" style="text-decoration:underline;color:#1e3a8a;">di sini</a>
+</div>
+<div style="height:40px;"></div>
+<style>
+#intro-screen {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #111827;
+  color: white;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  flex-direction: column;
+}
+#intro-screen h1 {
+  font-size: 32px;
+  margin: 0;
+  animation: fadeIn 1.5s ease;
+}
+#intro-screen p {
+  font-size: 18px;
+  opacity: 0.8;
+  animation: fadeIn 2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+<div id="intro-screen">
+<h1>Acuz Store</h1>
+<p>Solusi Produk Digital &amp; Layanan Modern</p>
+</div>
+<script>
+  if (!localStorage.getItem("introSeen")) {
+    setTimeout(() => {
+      document.getElementById("intro-screen").style.display = "none";
+      localStorage.setItem("introSeen", "true");
+    }, 2500);
+  } else {
+    document.getElementById("intro-screen").style.display = "none";
+  }
+</script>
+<header style=" flex-direction: column; align-items: center; gap: 10px;">
+<h1>Acuz Store</h1>
+<button id="menu-toggle" style="display:none; font-size: 24px; background:none; border:none; cursor:pointer;">☰</button>
+<nav id="main-nav" style="flex-wrap: wrap;">
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">Produk</a></li>
+<li><a href="#">Kontak</a></li>
+<li><button id="dark-toggle" style="font-size: 18px; background: none; border: none; cursor: pointer;" title="Toggle Dark Mode">🌙</button></li>
+</ul>
+</nav>
+</header>
+<div id="promo-banner" style="background-color:#facc15; color:#000; text-align:center; padding:12px; font-weight:bold;">🎉 Promo Spesial Hari Ini: Diskon 20% untuk semua layanan! 🎉<button onclick="document.getElementById('promo-banner').style.display='none';" style="margin-left: 10px; padding: 5px 10px; font-size: 14px; cursor: pointer;">Tutup</button></div>
 <!-- Loader -->
 <div id="loader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999; display: flex; justify-content: center; align-items: center;">
-<div class="spinner"></div>
+<div class="loader-ripple"><div></div><div></div></div>
 </div>
 <style>
+.loader-ripple {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.loader-ripple div {
+  position: absolute;
+  border: 4px solid #2563eb;
+  opacity: 1;
+  border-radius: 50%;
+  animation: ripple 1.2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.loader-ripple div:nth-child(2) {
+  animation-delay: -0.6s;
+}
+@keyframes ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
+
+.loader-modern {
+  display: flex;
+  gap: 8px;
+}
+.loader-modern span {
+  width: 14px;
+  height: 14px;
+  background: #2563eb;
+  border-radius: 50%;
+  animation: bounce 0.6s infinite ease-in-out alternate;
+}
+.loader-modern span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loader-modern span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+  to {
+    transform: translateY(-20px);
+    opacity: 1;
+  }
+}
+
 .spinner {
   width: 50px;
   height: 50px;
@@ -284,94 +537,181 @@ window.addEventListener("load", () => {
   document.getElementById("loader").style.display = "none";
 });
 </script>
-<header style=" flex-direction: column; align-items: center; gap: 10px;">
-<h1>Acuz Store</h1>
-<button id="menu-toggle" style="display:none; font-size: 24px; background:none; border:none; cursor:pointer;">☰</button>
-<nav id="main-nav" style="flex-wrap: wrap;">
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#">Produk</a></li>
-<li><a href="#">Kontak</a></li>
-<li><button id="dark-toggle" style="font-size: 18px; background: none; border: none; cursor: pointer;" title="Toggle Dark Mode">🌙</button></li>
-</ul>
-</nav>
-</header>
-<section class="hero">
-<h2>Selamat Datang di Acuz Store</h2>
-<p>Banyak pilihan produk dan di jamin aman terpercaya!</p>
+<section class="hero" data-aos="fade-up">
+<div style="position:relative;z-index:1;padding-top:100px;">
+<h1 style="font-size:32px;margin-bottom:20px;">👋 Selamat Datang di Acuz Store</h1>
+<div id="live-chat-text" style="background:#1f2937;padding:20px 30px;border-radius:12px;display:inline-block;font-size:18px;box-shadow:0 0 10px rgba(0,0,0,0.5);">
+    Menyambungkan ke asisten kami...
+  </div>
+</div>
+<script>
+  const chatMessages = [
+    "🎉 Promo Hari Ini: Cashback 15% untuk semua layanan!",
+    "🤖 Layanan cepat & otomatis dalam hitungan detik.",
+    "🔒 Aman, Terpercaya, dan Terbukti sejak 2021.",
+    "📦 Siap membantu kebutuhan digitalmu sekarang juga!"
+  ];
+  let msgIndex = 0;
+  setInterval(() => {
+    document.getElementById("live-chat-text").textContent = chatMessages[msgIndex];
+    msgIndex = (msgIndex + 1) % chatMessages.length;
+  }, 4000);
+</script>
 </section>
-<section class="search-section">
+<section class="search-section" data-aos="fade-up">
 <div class="container">
-<input id="searchInput" onkeyup="searchProducts()" placeholder="Cari produk..." type="text"/>
+<input id="searchInput" onkeyup="searchProducts()" placeholder="Cari produk..." style="; background:#111827; color:white; border:1px solid #4b5563;" type="text"/>
 </div>
 </section>
-<section class="products" id="productSection">
+<div id="search-section" style="text-align:center;padding:20px;">
+<input id="search-box" placeholder="Cari produk..." style="padding:10px;width:300px;border-radius:6px;" type="text"/>
+<div id="suggestions" style="color:white;margin-top:10px;"></div>
+</div>
+<script>
+const productNames = ["Panel 1GB", "WA Bot Pro", "Desain Logo", "Paket Combo Hosting", "Autoreply WA", "Bot Top Up"];
+document.getElementById("search-box").addEventListener("input", function() {
+  const input = this.value.toLowerCase();
+  const match = productNames.filter(p => p.toLowerCase().includes(input));
+  document.getElementById("suggestions").innerHTML = match.slice(0, 3).map(m => "🔍 " + m).join("<br>");
+});
+</script>
+<section class="products" data-aos="fade-up" id="productSection">
+<div style="text-align:center; padding:20px;">
+<button class="btn" onclick="filterCategory('all')">Semua</button>
+<button class="btn" onclick="filterCategory('bot')">WA Bot</button>
+<button class="btn" onclick="filterCategory('design')">Design</button>
+<button class="btn" onclick="filterCategory('tools')">Tools</button>
+</div>
+<script>
+function filterCategory(cat) {
+  document.querySelectorAll('.product-card').forEach(el => {
+    const type = el.getAttribute("data-cat");
+    el.style.display = (cat === "all" || cat === type) ? "block" : "none";
+  });
+}
+</script>
+<script>
+function sortByPrice(order = 'asc') {
+  const grid = document.getElementById("productGrid");
+  const cards = Array.from(grid.children);
+  cards.sort((a, b) => {
+    const priceA = parseInt(a.querySelector(".price").textContent.replace(/\D/g, '')) || 0;
+    const priceB = parseInt(b.querySelector(".price").textContent.replace(/\D/g, '')) || 0;
+    return order === 'asc' ? priceA - priceB : priceB - priceA;
+  });
+  cards.forEach(card => grid.appendChild(card));
+}
+</script>
+<div style="text-align:center; margin-bottom:10px;">
+<button class="btn" onclick="sortByPrice('asc')">Sort Harga Naik</button>
+<button class="btn" onclick="sortByPrice('desc')">Sort Harga Turun</button>
+</div>
 <div style="text-align:center; margin-bottom:20px;">
 <button class="btn" onclick="filterCategory('all')">Semua</button>
 <button class="btn" onclick="filterCategory('digital')">Digital</button>
 <button class="btn" onclick="filterCategory('layanan')">Layanan</button>
 </div>
 <h3>Produk Unggulan</h3>
-<div class="product-grid" id="productGrid">
+<div style="position: relative;"><button id="scroll-left" style="position:absolute; top:50%; left:0; transform:translateY(-50%); z-index:10; background:#2563eb; border:none; color:white; padding:10px; border-radius:50%; cursor:pointer;">←</button><div class="product-grid" id="productGrid">
 <!-- Produk 1 -->
-<div class="product-card" data-aos="fade-up" data-category="digital" style="position:relative;"><div style="position:absolute; top:10px; left:10px; background:#facc15; color:#000; padding:4px 8px; font-size:12px; font-weight:bold; border-radius:4px;">🔥 Terlaris</div>
+<div class="product-card glass-card" data-aos="fade-up" data-cat="bot" data-category="digital" style="position:relative;; position:relative;; position:relative;"><div style="position:absolute;top:10px;left:10px;background:#f59e0b;color:white;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;">⭐ Terlaris</div><div style="position:absolute;top:10px;right:10px;background:#ef4444;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Habis</div><div style="position:absolute; top:10px; left:10px; background:#facc15; color:#000; padding:4px 8px; font-size:12px; font-weight:bold; border-radius:4px;">🔥 Terlaris</div>
 <img alt="Panel BotWa" src="https://source.unsplash.com/300x300/?batik,1"/>
 <div class="product-info">
 <h4>Panel 1gb - Unli</h4>
 <p>Panel Bot Wa Bonus Script Bot Jaga Grub/Pushkontak/Scbug</p>
-<div class="price">Rp1.000-10.000</div>
-<a class="btn" href="https://wa.me/6288298717014?text=Halo%20saya%20ingin%20membeli%20produk%20Panel%201gb%20-%20Unli">Beli Sekarang</a>
-</div>
+<div id="promo-timer" style="color:#ef4444;font-weight:bold;"></div><div class="price">Rp1.000-10.000</div>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+<button class="btn" onclick="toggleWishlist('Panel 1gb - Unli')">❤️ Wishlist</button><button class="btn" onclick="addToCart('Panel 1gb - Unli')">🛒 Tambah ke Keranjang</button></div>
 </div>
 <!-- Produk 2 -->
-<div class="product-card" data-aos="fade-up" data-category="digital" style="position:relative;"><div style="position:absolute; top:10px; left:10px; background:#facc15; color:#000; padding:4px 8px; font-size:12px; font-weight:bold; border-radius:4px;">🆕 Baru</div>
+<div class="product-card glass-card" data-aos="fade-up" data-cat="bot" data-category="digital" style="position:relative;; position:relative;"><div style="position:absolute;top:10px;right:10px;background:#ef4444;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Habis</div><div style="position:absolute; top:10px; left:10px; background:#facc15; color:#000; padding:4px 8px; font-size:12px; font-weight:bold; border-radius:4px;">🆕 Baru</div>
 <img alt="Nokos ID" src="https://source.unsplash.com/300x300/?batik,2"/>
 <div class="product-info">
 <h4>Nokos Reg Indonesia</h4>
 <p>Harga Terjangkau Dan Pastinya Aman</p>
 <div class="price">Rp5.000</div>
-<a class="btn" href="https://wa.me/6288298717014?text=Halo%20saya%20ingin%20membeli%20produk%20Nokos%20Reg%20Indonesia">Beli Sekarang</a>
-</div>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+<button class="btn" onclick="toggleWishlist('Nokos Reg Indonesia')">❤️ Wishlist</button><button class="btn" onclick="addToCart('Nokos Reg Indonesia')">🛒 Tambah ke Keranjang</button></div>
 </div>
 <!-- Produk 3 -->
-<div class="product-card" data-aos="fade-up" data-category="digital">
+<div class="product-card glass-card" data-aos="fade-up" data-cat="bot" data-category="digital" style="; position:relative;; position:relative;"><div style="position:absolute;top:10px;left:10px;background:#f59e0b;color:white;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;">⭐ Terlaris</div><div style="position:absolute;top:10px;right:10px;background:#ef4444;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Habis</div>
 <img alt="Medsos Shop" src="https://source.unsplash.com/300x300/?batik,3"/>
 <div class="product-info">
 <h4>Followers/Like/Views</h4>
 <p>Tersedia Suntik Followers/Like/Views Harga Terjangkau</p>
 <div class="price">Rp1.500-200.000</div>
-<a class="btn" href="https://wa.me/6288298717014?text=Halo%20saya%20ingin%20membeli%20produk%20Followers%2FLike%2FViews">Beli Sekarang</a>
-</div>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+<button class="btn" onclick="toggleWishlist('Followers/Like/Views')">❤️ Wishlist</button><button class="btn" onclick="addToCart('Followers/Like/Views')">🛒 Tambah ke Keranjang</button></div>
 </div>
 <!-- Produk 4 -->
-<div class="product-card" data-aos="fade-up" data-category="layanan">
+<div class="product-card glass-card" data-aos="fade-up" data-cat="bot" data-category="layanan" style="; position:relative;"><div style="position:absolute;top:10px;right:10px;background:#22c55e;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Tersedia</div>
 <img alt="Murid Bug" src="https://source.unsplash.com/300x300/?batik,4"/>
 <div class="product-info">
 <h4>Murid Bug</h4>
 <p>Bisa Untuk Mengebug Para Riper Dan Bocil Anomali</p>
 <div class="price">Rp5.000</div>
-<a class="btn" href="https://wa.me/6288298717014?text=Halo%20saya%20ingin%20membeli%20produk%20Murid%20Bug">Beli Sekarang</a>
-</div>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+<button class="btn" onclick="toggleWishlist('Murid Bug')">❤️ Wishlist</button><button class="btn" onclick="addToCart('Murid Bug')">🛒 Tambah ke Keranjang</button></div>
 </div>
 <!-- Produk 5 -->
-<div class="product-card" data-aos="fade-up" data-category="layanan">
+<div class="product-card glass-card" data-aos="fade-up" data-cat="bot" data-category="layanan" style="; position:relative;; position:relative;"><div style="position:absolute;top:10px;left:10px;background:#f59e0b;color:white;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;">⭐ Terlaris</div><div style="position:absolute;top:10px;right:10px;background:#ef4444;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Habis</div>
 <img alt="JasaBuat Website" src="https://source.unsplash.com/300x300/?batik,5"/>
 <div class="product-info">
 <h4>JasButWebsite</h4>
 <p>Bisa request dan tinggal terima beres saja</p>
 <div class="price">Rp20.000</div>
-<a class="btn" href="https://wa.me/6288298717014?text=Halo%20saya%20ingin%20membeli%20produk%20JasButWebsite">Beli Sekarang</a>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+<button class="btn" onclick="toggleWishlist('JasButWebsite')">❤️ Wishlist</button><button class="btn" onclick="addToCart('JasButWebsite')">🛒 Tambah ke Keranjang</button></div>
 </div>
-</div>
-</div>
+<div class="product-card glass-card" data-aos="fade-up" data-cat="bot" data-category="digital" style="; position:relative;"><div style="position:absolute;top:10px;right:10px;background:#ef4444;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Habis</div>
+<img alt="Design Twibbon" src="https://source.unsplash.com/300x300/?batik,6"/>
+<div class="product-info">
+<h4>Design Twibbon</h4>
+<p>Custom twibbon menarik untuk promosi atau event.</p>
+<div class="price">Rp10.000</div>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+<button class="btn" onclick="toggleWishlist('Design Twibbon')">❤️ Wishlist</button><button class="btn" onclick="addToCart('Design Twibbon')">🛒 Tambah ke Keranjang</button></div>
+</div><div class="product-card glass-card" data-aos="fade-up" data-cat="bot" data-category="digital" style="; position:relative;; position:relative;"><div style="position:absolute;top:10px;left:10px;background:#f59e0b;color:white;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;">⭐ Terlaris</div><div style="position:absolute;top:10px;right:10px;background:#ef4444;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Habis</div>
+<img alt="Template Feed IG" src="https://source.unsplash.com/300x300/?batik,7"/>
+<div class="product-info">
+<h4>Template Feed IG</h4>
+<p>Template Canva siap pakai untuk Instagram aesthetic.</p>
+<div class="price">Rp8.000</div>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+<button class="btn" onclick="toggleWishlist('Template Feed IG')">❤️ Wishlist</button><button class="btn" onclick="addToCart('Template Feed IG')">🛒 Tambah ke Keranjang</button></div>
+</div><div class="product-card glass-card" data-aos="fade-up" data-cat="bot" data-category="digital" style="; position:relative;"><div style="position:absolute;top:10px;right:10px;background:#22c55e;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Tersedia</div>
+<img alt="Ebook Copywriting" src="https://source.unsplash.com/300x300/?batik,8"/>
+<div class="product-info">
+<h4>Ebook Copywriting</h4>
+<p>Panduan lengkap menulis teks jualan yang menjual.</p>
+<div class="price">Rp15.000</div>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+<button class="btn" onclick="toggleWishlist('Ebook Copywriting')">❤️ Wishlist</button><button class="btn" onclick="addToCart('Ebook Copywriting')">🛒 Tambah ke Keranjang</button></div>
+</div><div class="product-card glass-card" data-aos="fade-up" data-cat="bot" data-category="digital" style="; position:relative;; position:relative;"><div style="position:absolute;top:10px;left:10px;background:#f59e0b;color:white;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;">⭐ Terlaris</div><div style="position:absolute;top:10px;right:10px;background:#ef4444;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Habis</div>
+<img alt="Top Up ML / FF" src="https://source.unsplash.com/300x300/?batik,9"/>
+<div class="product-info">
+<h4>Top Up ML / FF</h4>
+<p>Layanan isi ulang cepat &amp; murah berbagai game.</p>
+<div class="price">Rp5.000 - 500.000</div>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+<button class="btn" onclick="toggleWishlist('Top Up ML / FF')">❤️ Wishlist</button><button class="btn" onclick="addToCart('Top Up ML / FF')">🛒 Tambah ke Keranjang</button></div>
+</div><div class="product-card glass-card" data-aos="fade-up" data-cat="bot" data-category="digital" style="; position:relative;"><div style="position:absolute;top:10px;right:10px;background:#22c55e;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Tersedia</div>
+<img alt="Bot Telegram Custom" src="https://source.unsplash.com/300x300/?batik,10"/>
+<div class="product-info">
+<h4>Bot Telegram Custom</h4>
+<p>Bot Telegram sesuai kebutuhan: notifikasi, autoresponder, dll.</p>
+<div class="price">Rp25.000</div>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+<button class="btn" onclick="toggleWishlist('Bot Telegram Custom')">❤️ Wishlist</button><button class="btn" onclick="addToCart('Bot Telegram Custom')">🛒 Tambah ke Keranjang</button></div>
+</div></div><button id="scroll-right" style="position:absolute; top:50%; right:0; transform:translateY(-50%); z-index:10; background:#2563eb; border:none; color:white; padding:10px; border-radius:50%; cursor:pointer;">→</button></div>
 </section>
-<section style="padding: 40px 20px; background: #f9fafb;">
+<section data-aos="fade-up" style="padding: 40px 20px; background: #f9fafb;">
 <h3 style="text-align:center; font-size: 24px; margin-bottom: 20px;">Pesanan Custom</h3>
 <form onsubmit="return sendCustomOrder()" style="max-width: 600px; margin: auto;">
-<input id="custName" placeholder="Nama Anda" required="" style="width:100%;padding:10px;margin-bottom:10px;" type="text"/>
-<input id="custOrder" placeholder="Pesanan Anda" required="" style="width:100%;padding:10px;margin-bottom:10px;" type="text"/>
-<textarea id="custNote" placeholder="Catatan Tambahan" rows="4" style="width:100%;padding:10px;margin-bottom:10px;"></textarea>
-<input id="promoCode" placeholder="Kode Promo (opsional)" style="width:100%;padding:10px;margin-bottom:10px;" type="text"/>
+<input id="custName" placeholder="Nama Anda" required="" style="width:100%;padding:10px;margin-bottom:10px;; background:#111827; color:white; border:1px solid #4b5563;" type="text"/>
+<input id="custOrder" placeholder="Pesanan Anda" required="" style="width:100%;padding:10px;margin-bottom:10px;; background:#111827; color:white; border:1px solid #4b5563;" type="text"/>
+<textarea id="custNote" placeholder="Catatan Tambahan" rows="4" style="width:100%;padding:10px;margin-bottom:10px;; background:#111827; color:white; border:1px solid #4b5563;"></textarea>
+<input id="promoCode" placeholder="Kode Promo (opsional)" style="width:100%;padding:10px;margin-bottom:10px;; background:#111827; color:white; border:1px solid #4b5563;" type="text"/>
 <button class="btn" type="submit">Kirim ke WhatsApp</button>
 </form>
 </section>
@@ -388,7 +728,7 @@ function sendCustomOrder() {
   return false;
 }
 </script>
-<section class="testimonials" style="padding: 40px 20px; background-color: #f8fafc; text-align: center;">
+<section class="testimonials" data-aos="fade-up" style="padding: 40px 20px; background-color: #f8fafc; text-align: center;">
 <h3 style="font-size: 24px; margin-bottom: 24px;">Apa Kata Pelanggan?</h3>
 <div id="testimonial-container" style="max-width: 600px; margin: 0 auto; position: relative;">
 <div class="testimonial-slide" style="font-size: 16px; color: #333;">
@@ -405,7 +745,7 @@ function sendCustomOrder() {
 </div>
 </div>
 </section>
-<section class="contact" style="background: url('background_acuzstore.png') no-repeat center center/cover; position: relative; overflow: hidden; color: white;">
+<section class="contact" data-aos="fade-up" style="background: url('background_acuzstore.png') no-repeat center center/cover; position: relative; overflow: hidden; color: white;">
 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
                 background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 0;"></div>
 <div class="container" style=" position: relative; z-index: 1;">
@@ -422,20 +762,20 @@ function sendCustomOrder() {
 <iframe allowfullscreen="" height="250" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126926.41232682226!2d122.4621336!3d-5.4684789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9806b123456789%3A0xabcdef123456789!2sButon%2C%20Sulawesi%20Tenggara!5e0!3m2!1sid!2sid!4v1685000000000!5m2!1sid!2sid" style="border:0; border-radius: 10px;" width="100%"></iframe>
 </div>
 </section>
-<section style="padding: 40px 20px; background: #f1f5f9;">
+<section data-aos="fade-up" style="padding: 40px 20px; background: #1f2937;">
 <h3 style="text-align:center; font-size: 24px; margin-bottom: 20px;">FAQ (Pertanyaan Umum)</h3>
 <div class="faq" style="max-width: 600px; margin: 0 auto;">
 <div>
 <button onclick="toggleFaq(this)" style="width: 100%; text-align: left; font-weight: bold; padding: 10px; border: none; background: #2563eb; color: white; margin-bottom: 5px;">Bagaimana cara membeli produk?</button>
-<div style="display:none; padding: 10px; background: white; border: 1px solid #ddd;">Klik tombol "Beli Sekarang" lalu Anda akan diarahkan ke WhatsApp admin kami.</div>
+<div class="faq-content" style="display:none; padding: 10px; background: #1f2937; border: 1px solid #ddd;">Klik tombol "Beli Sekarang" lalu Anda akan diarahkan ke WhatsApp admin kami.</div>
 </div>
 <div>
 <button onclick="toggleFaq(this)" style="width: 100%; text-align: left; font-weight: bold; padding: 10px; border: none; background: #2563eb; color: white; margin-bottom: 5px;">Apakah semua produk ready?</button>
-<div style="display:none; padding: 10px; background: white; border: 1px solid #ddd;">Ya, semua produk digital tersedia 24 jam.</div>
+<div class="faq-content" style="display:none; padding: 10px; background: #1f2937; border: 1px solid #ddd;">Ya, semua produk digital tersedia 24 jam.</div>
 </div>
 <div>
 <button onclick="toggleFaq(this)" style="width: 100%; text-align: left; font-weight: bold; padding: 10px; border: none; background: #2563eb; color: white; margin-bottom: 5px;">Berapa lama proses transaksi?</button>
-<div style="display:none; padding: 10px; background: white; border: 1px solid #ddd;">Transaksi diproses dalam hitungan menit selama jam operasional.</div>
+<div class="faq-content" style="display:none; padding: 10px; background: #1f2937; border: 1px solid #ddd;">Transaksi diproses dalam hitungan menit selama jam operasional.</div>
 </div>
 </div>
 </section>
@@ -444,6 +784,40 @@ function toggleFaq(btn) {
   const content = btn.nextElementSibling;
   content.style.display = content.style.display === 'block' ? 'none' : 'block';
 }
+</script>
+<section data-aos="fade-up" style="padding:40px 20px; background:#1f2937; color:white;">
+<h3 style="text-align:center;">📬 Kirim Pemesanan ke Google Sheets</h3>
+<form id="form-pesan" style="max-width:400px;margin:auto;">
+<input name="nama" placeholder="Nama Anda" required="" style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:none;; background:#111827; color:white; border:1px solid #4b5563;" type="text"/>
+<input name="wa" placeholder="Nomor WhatsApp" required="" style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:none;; background:#111827; color:white; border:1px solid #4b5563;" type="text"/>
+<textarea name="pesan" placeholder="Pesan atau Produk yang dipesan" required="" style="width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:none;; background:#111827; color:white; border:1px solid #4b5563;"></textarea>
+<button class="btn" style="width:100%;" type="submit">Kirim</button>
+<div id="status" style="margin-top:10px;text-align:center;"></div>
+</form>
+</section>
+<script>
+  const form = document.getElementById("form-pesan");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const data = {
+      nama: form.nama.value,
+      wa: form.wa.value,
+      pesan: form.pesan.value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbzhXRSn1tc4fYnBybJ2alvC8qs-NAp3qm-aub7Tv12gQ83tzaMxak3jgXMzdc7SYEB_/exec", {
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(result => {
+      document.getElementById("status").textContent = "✅ Data berhasil dikirim!";
+      form.reset();
+    })
+    .catch(err => {
+      document.getElementById("status").textContent = "❌ Gagal mengirim data.";
+    });
+  });
 </script>
 <footer>
     © 2025 Acuz Store. Bee A Smart Buyer.
@@ -530,7 +904,6 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
-
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -542,5 +915,704 @@ s0.parentNode.insertBefore(s1,s0);
     }
   });
 </script>
+<script>
+document.getElementById('scroll-left').addEventListener('click', function() {
+  document.querySelector('.product-grid').scrollBy({ left: -300, behavior: 'smooth' });
+});
+document.getElementById('scroll-right').addEventListener('click', function() {
+  document.querySelector('.product-grid').scrollBy({ left: 300, behavior: 'smooth' });
+});
+</script>
+<script>
+  function toggleWishlist(productName) {
+    let wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+    if (wishlist.includes(productName)) {
+      wishlist = wishlist.filter(item => item !== productName);
+      alert(productName + " dihapus dari wishlist.");
+    } else {
+      wishlist.push(productName);
+      alert(productName + " ditambahkan ke wishlist.");
+    }
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }
+</script>
+<section data-aos="fade-up" style="padding: 40px 20px; background: #f9fafb;">
+<h3 style="text-align:center; font-size: 24px; margin-bottom: 20px;">🔥 Produk Terlaris Minggu Ini</h3>
+<ul style="max-width: 600px; margin: auto; list-style: none; padding: 0; font-size: 16px; color: #333;">
+<li>✅ Panel 1gb - Unli</li>
+<li>✅ Followers/Like/Views</li>
+<li>✅ Nokos Reg Indonesia</li>
+</ul>
+</section>
+<style>
+#social-proof {
+  position: fixed;
+  bottom: 100px;
+  left: 20px;
+  background: #2563eb;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: none;
+  z-index: 999;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+</style>
+<div id="social-proof">📦 Seseorang baru saja membeli Panel 1gb!</div>
+<script>
+  const messages = [
+    "📦 Seseorang baru saja membeli Panel 1gb!",
+    "🛒 Pengunjung dari Jakarta menambahkan produk ke keranjang!",
+    "📲 Pembelian Jasa WA Bot berhasil!",
+  ];
+  let index = 0;
+  setInterval(() => {
+    const box = document.getElementById("social-proof");
+    box.textContent = messages[index];
+    box.style.display = "block";
+    setTimeout(() => { box.style.display = "none"; }, 4000);
+    index = (index + 1) % messages.length;
+  }, 10000);
+</script>
+<section data-aos="fade-up" style="padding: 40px 20px; background: #e5e7eb;">
+<h3 style="text-align:center;">🛒 Keranjang Anda</h3>
+<ul id="cart-list" style="max-width:600px;margin:auto;list-style:none;padding:0;"></ul>
+<div style="text-align:center;margin-top:10px;">
+<button class="btn" onclick="sendCartToWA()">Kirim ke WhatsApp</button>
+</div>
+<button class="btn" onclick="showInvoicePreview()">🧾 Lihat Invoice &amp; Kirim WA</button><div style="text-align:center;margin:10px;"><button class="btn" onclick="openCheckout()">🛍️ Checkout</button></div></section>
+<script>
+  const cart = [];
+  function addToCart(productName) {
+    cart.push(productName);
+    alert(productName + " ditambahkan ke keranjang!");
+    updateCartUI();
+  }
+  function updateCartUI() {
+    const cartList = document.getElementById("cart-list");
+    cartList.innerHTML = "";
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = "• " + item;
+      cartList.appendChild(li);
+    });
+  }
+  function sendCartToWA() {
+    if (cart.length === 0) {
+      alert("Keranjang kosong!");
+      return;
+    }
+    const message = "Halo, saya ingin memesan: " + cart.join(", ");
+    window.open("https://wa.me/6288298717014?text=" + encodeURIComponent(message), "_blank");
+  }
+</script>
+<style>
+#quick-nav {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #2563eb;
+  color: white;
+  padding: 10px;
+  border-radius: 10px 0 0 10px;
+  font-size: 14px;
+  z-index: 999;
+}
+#quick-nav a {
+  display: block;
+  color: white;
+  margin: 6px 0;
+  text-decoration: none;
+}
+#quick-nav a:hover {
+  text-decoration: underline;
+}
+</style>
+<div id="quick-nav">
+<a href="#productSection">📦 Produk</a>
+<a href="#testimonial-container">💬 Testimoni</a>
+<a href="#cart-list">🛒 Keranjang</a>
+<a href="#faq">❓ FAQ</a>
+<a href="#contact">📞 Kontak</a>
+</div>
+<script>
+const typedPhrases = [
+  "Selamat Datang di Acuz Store",
+  "Menjual Produk Digital dan Layanan Otomatis",
+  "Diskon Menarik Setiap Hari!"
+];
+let typedIndex = 0, charIndex = 0;
+function typeEffect() {
+  const span = document.getElementById("typed-text");
+  if (!span) return;
+  if (charIndex < typedPhrases[typedIndex].length) {
+    span.textContent += typedPhrases[typedIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(typeEffect, 80);
+  } else {
+    setTimeout(() => {
+      span.textContent = "";
+      charIndex = 0;
+      typedIndex = (typedIndex + 1) % typedPhrases.length;
+      typeEffect();
+    }, 2000);
+  }
+}
+document.addEventListener("DOMContentLoaded", typeEffect);
+</script>
+<style>
+#image-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+#image-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+</style>
+<div id="image-modal" onclick="this.style.display='none'"><img id="modal-img" src=""/></div>
+<script>
+document.querySelectorAll('.product-card img').forEach(img => {
+  img.style.cursor = 'zoom-in';
+  img.addEventListener('click', () => {
+    document.getElementById('modal-img').src = img.src;
+    document.getElementById('image-modal').style.display = 'flex';
+  });
+});
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<script>
+  AOS.init({ duration: 1000, once: true });
+</script>
+<style>
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  background: #2563eb;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  display: none;
+  z-index: 9999;
+}
+.parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+<div class="toast" id="toast"></div>
+<script>
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  setTimeout(() => toast.style.display = "none", 3000);
+}
+</script>
+<script>
+setInterval(() => {
+  console.log("Auto-refresh check for new products..."); // Dummy
+}, 30000);
+</script>
+<section data-aos="fade-up" style="background: #1f2937;padding:40px 20px;text-align:center;">
+<h3 style="font-size:24px;margin-bottom:20px;">📊 Statistik Kami</h3>
+<div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap;">
+<div><div class="counter" data-count="10000" style="font-size:32px;font-weight:bold;color:#2563eb;">0</div><p>Pelanggan</p></div>
+<div><div class="counter" data-count="500" style="font-size:32px;font-weight:bold;color:#2563eb;">0</div><p>Produk Terjual</p></div>
+<div><div class="counter" data-count="120" style="font-size:32px;font-weight:bold;color:#2563eb;">0</div><p>Produk Aktif</p></div>
+</div>
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const counters = document.querySelectorAll(".counter");
+  counters.forEach(counter => {
+    const update = () => {
+      const target = +counter.getAttribute("data-count");
+      const count = +counter.innerText;
+      const increment = target / 100;
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(update, 20);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    update();
+  });
+});
+</script>
+<script>
+function toggleFaq(btn) {
+  const content = btn.nextElementSibling;
+  if (content.style.maxHeight) {
+    content.style.maxHeight = null;
+  } else {
+    content.style.maxHeight = content.scrollHeight + "px";
+  }
+}
+</script>
+<style>
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+</style>
+<link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<section style="padding:40px 20px;background: #1f2937;">
+<h3 style="text-align:center;">🗺️ Lokasi Kami</h3>
+<div id="mymap" style="height:300px;margin-top:20px;border-radius:10px;"></div>
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var map = L.map('mymap').setView([-5.4685, 122.568], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+  }).addTo(map);
+  L.marker([-5.4685, 122.568]).addTo(map)
+    .bindPopup('Acuz Store - Buton')
+    .openPopup();
+});
+</script>
+<style>
+#chatbot-faq {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 220px;
+  padding: 10px;
+  font-size: 14px;
+  z-index: 10000;
+}
+#chatbot-faq select {
+  width: 100%;
+  margin-bottom: 8px;
+}
+</style>
+<script>
+function confirmBuy(url) {
+  const go = confirm("Yakin ingin beli produk ini?");
+  if(go) window.open(url, '_blank');
+}
+document.querySelectorAll('a.btn[href*="wa.me"]').forEach(btn => {
+  const url = btn.href;
+  btn.setAttribute("onclick", "confirmBuy('" + url + "'); return false;");
+});
+</script>
+<script>
+function startCountdown(seconds, elementId) {
+  let el = document.getElementById(elementId);
+  let interval = setInterval(() => {
+    const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const s = String(seconds % 60).padStart(2, '0');
+    el.textContent = `🔥 Promo berakhir dalam ${m}:${s}`;
+    if (seconds-- <= 0) clearInterval(interval);
+  }, 1000);
+}
+</script>
+<script>startCountdown(180, "promo-timer");</script>
+<audio id="bg-music" loop="" style="display:none;">
+<source src="https://cdn.pixabay.com/download/audio/2022/10/03/audio_8db968ef9d.mp3?filename=soft-piano-ambient-111120.mp3" type="audio/mpeg"/>
+</audio>
+<button onclick="toggleMusic()" style="position:fixed;top:20px;left:20px;z-index:9999;padding:8px 12px;border:none;background:#2563eb;color:#fff;border-radius:6px;cursor:pointer;">🎵 Musik</button>
+<script>
+let playing = false;
+function toggleMusic() {
+  const music = document.getElementById("bg-music");
+  if (playing) {
+    music.pause();
+  } else {
+    music.play();
+  }
+  playing = !playing;
+}
+</script>
+<script>
+function showInvoicePreview() {
+  if (cart.length === 0) {
+    alert("Keranjang kosong!");
+    return;
+  }
+  const items = cart.join("\n- ");
+  const preview = "🧾 Ringkasan Pesanan:\n- " + items + "\n\nTotal item: " + cart.length;
+  alert(preview);
+  const message = "Halo, saya ingin memesan:\n- " + cart.join("\n- ");
+  window.open("https://wa.me/6288298717014?text=" + encodeURIComponent(message), "_blank");
+}
+</script>
+<style>
+#checkout-popup {
+  display: none;
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1f2937;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 10000;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+</style>
+<div id="checkout-popup">
+<h3>🧾 Checkout</h3>
+<div id="checkout-content" style="margin-bottom:10px;"></div>
+<button class="btn" onclick="sendCartToWA()">Kirim ke WhatsApp</button>
+<button class="btn" onclick="document.getElementById('checkout-popup').style.display='none'">Tutup</button>
+</div>
+<script>
+function openCheckout() {
+  if (cart.length === 0) {
+    alert("Keranjang kosong!");
+    return;
+  }
+  const items = cart.map(item => "• " + item).join("<br>");
+  document.getElementById("checkout-content").innerHTML = items;
+  document.getElementById("checkout-popup").style.display = "block";
+}
+</script>
+<section data-aos="fade-up" style="padding:40px 20px; background:#1f2937; color:white;">
+<h3 style="text-align:center;">📅 Jadwal Promo</h3>
+<ul style="max-width:600px; margin:auto; font-size:16px;">
+<li>1 Juni - Diskon 20% untuk Panel Bot</li>
+<li>5 Juni - Promo Followers Bonus Like</li>
+<li>10 Juni - Gratis Setup Website untuk 3 pembeli pertama</li>
+</ul>
+</section>
+<section data-aos="fade-up" style="padding:40px 20px;">
+<h3 style="text-align:center; color:#fff;">🔁 Produk Lainnya yang Mungkin Anda Suka</h3>
+<div class="product-grid">
+<div class="product-card glass-card" data-cat="bot" style="; position:relative;; position:relative;"><div style="position:absolute;top:10px;left:10px;background:#f59e0b;color:white;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;">⭐ Terlaris</div><div style="position:absolute;top:10px;right:10px;background:#22c55e;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Tersedia</div>
+<img alt="Rekomendasi 1" src="https://source.unsplash.com/300x300/?digital,product"/>
+<div class="product-info">
+<h4>Paket Combo WA Bot + Hosting</h4>
+<p>Solusi lengkap untuk usaha digital Anda</p>
+<div class="price">Rp15.000</div>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+</div>
+</div>
+</div>
+</section>
+<div style="position:fixed;bottom:20px;right:20px;z-index:999;">
+<button onclick="document.getElementById('feedback-box').style.display='block'" style="background:#2563eb;color:white;padding:10px;border:none;border-radius:6px;cursor:pointer;">💬 Masukan</button>
+</div>
+<div id="feedback-box" style="display:none;position:fixed;bottom:80px;right:20px;background:#1f2937;padding:15px;border-radius:8px;color:white;z-index:9999;width:280px;">
+<strong>Berikan Masukan:</strong>
+<textarea id="feedback-text" placeholder="Ketik di sini..." style="width:100%;margin-top:8px;padding:6px;; background:#111827; color:white; border:1px solid #4b5563;"></textarea>
+<button onclick="submitFeedback()" style="margin-top:8px;width:100%;background:#16a34a;color:white;border:none;padding:8px;border-radius:4px;">Kirim</button>
+</div>
+<script>
+function submitFeedback() {
+  const msg = document.getElementById('feedback-text').value;
+  if (msg.trim()) {
+    alert('✅ Masukan terkirim!');
+    document.getElementById('feedback-box').style.display = 'none';
+    document.getElementById('feedback-text').value = '';
+  }
+}
+</script>
+<audio id="hover-sound" preload="auto" src="https://assets.mixkit.co/sfx/preview/mixkit-click-error-1110.mp3"></audio>
+<script>
+  const sound = document.getElementById("hover-sound");
+  document.querySelectorAll("button, a.btn").forEach(el => {
+    el.addEventListener("mouseenter", () => sound.play());
+  });
+</script>
+<style>
+.neon * {
+  color: #0ff !important;
+  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+}
+</style>
+<button onclick="document.body.classList.toggle('neon')" style="position:fixed;top:50px;left:20px;z-index:9999;padding:8px 12px;background:#1e3a8a;color:white;border:none;border-radius:6px;">🌌 Neon Mode</button>
+<section data-aos="fade-up" style="padding:40px 20px;">
+<h3 style="text-align:center; color:white;">🔥 Produk Populer Minggu Ini</h3>
+<div class="product-grid">
+<div class="product-card glass-card" data-cat="bot" style="; position:relative;"><div style="position:absolute;top:10px;right:10px;background:#22c55e;color:white;padding:4px 8px;border-radius:6px;font-size:12px;">Tersedia</div>
+<img alt="Produk Populer" src="https://source.unsplash.com/300x300/?digital,software"/>
+<div class="product-info">
+<h4>WA Bot Auto Responder + Hosting</h4>
+<p>Bot auto reply canggih + server online</p>
+<div class="price">Rp19.000</div>
+<a class="btn" href="https://acuzstore-pembayaran.example.com/qris" target="_blank">Beli Sekarang</a>
+</div>
+</div>
+</div>
+</section>
+<div style="position:fixed;top:100px;right:20px;z-index:9999;background:#2563eb;color:white;padding:10px 14px;border-radius:50%;font-weight:bold;">
+  🛒 <span id="cart-count">0</span>
+</div>
+<script>
+const cartCount = document.getElementById("cart-count");
+const originalAddToCart = addToCart;
+addToCart = function(productName) {
+  originalAddToCart(productName);
+  cartCount.textContent = cart.length;
+}
+</script>
+<audio autoplay="" id="bg-music" loop="" style="display:none;">
+<source src="https://cdn.pixabay.com/audio/2022/03/10/audio_4f7745642f.mp3" type="audio/mpeg"/>
+</audio>
+<button onclick="toggleMusic()" style="position:fixed;top:20px;right:20px;z-index:9999;padding:8px 12px;border:none;background:#10b981;color:#fff;border-radius:6px;cursor:pointer;">🎵 Musik</button>
+<script>
+let playing = true;
+const music = document.getElementById("bg-music");
+function toggleMusic() {
+  if (playing) {
+    music.pause();
+  } else {
+    music.play();
+  }
+  playing = !playing;
+}
+</script>
+<div id="popup-notif" style="display:none;position:fixed;bottom:20px;left:20px;background:#16a34a;color:white;padding:12px 16px;border-radius:8px;z-index:9999;font-size:14px;">
+  ⭐ Seseorang baru saja membeli Paket WA Bot
+</div>
+<script>
+setInterval(() => {
+  const popup = document.getElementById("popup-notif");
+  popup.style.display = "block";
+  setTimeout(() => popup.style.display = "none", 3000);
+}, 30000);
+</script>
+<script>
+document.addEventListener("mousemove", function(e) {
+  const x = (e.clientX / window.innerWidth - 0.5) * 10;
+  const y = (e.clientY / window.innerHeight - 0.5) * 10;
+  document.querySelector(".hero video")?.style.setProperty("transform", `translate(${x}px, ${y}px) scale(1.05)`);
+});
+</script>
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" style="position:fixed;bottom:30px;right:20px;padding:10px 12px;background:#2563eb;color:white;border:none;border-radius:50%;font-size:18px;z-index:9999;">⬆️</button>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+<script>
+document.querySelectorAll("a.btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    confetti({particleCount: 100, spread: 70, origin: { y: 0.6 }});
+  });
+});
+</script>
+<section id="rahasia" style="display:none;background:#111827;color:white;padding:40px;text-align:center;">
+<h3>🕵️ Produk Rahasia</h3>
+<p>Selamat datang di area khusus pelanggan loyal!</p>
+</section>
+<div style="text-align:center;padding:20px;">
+<input id="kode-rahasia" placeholder="Masukkan kode rahasia" style="padding:8px;border-radius:6px;" type="password"/>
+<button class="btn" onclick="cekKode()">🔓 Masuk</button>
+</div>
+<script>
+function cekKode() {
+  const kode = document.getElementById("kode-rahasia").value;
+  if (kode === "acuzvip") {
+    document.getElementById("rahasia").style.display = "block";
+  } else {
+    alert("❌ Kode salah.");
+  }
+}
+</script>
+<section data-aos="fade-up" style="padding:40px;text-align:center;color:white;">
+<h3>🎓 Unduh Sertifikat Digital</h3>
+<p>Setelah membeli produk layanan, Anda bisa mengunduh sertifikat digital berikut.</p>
+<a class="btn" download="" href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" style="margin-top:10px;display:inline-block;">📄 Unduh Sertifikat</a>
+</section>
+<section data-aos="fade-up" style="padding:40px;text-align:center;background:#1f2937;color:white;">
+<h3>🎉 Putar Roda Diskon</h3>
+<canvas height="300" id="wheel" style="margin-top:20px;" width="300"></canvas><br/>
+<button class="btn" onclick="spinWheel()" style="margin-top:10px;">🎯 Putar Sekarang</button>
+<div id="reward" style="margin-top:15px;font-size:16px;font-weight:bold;"></div>
+</section>
+<script>
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+const rewards = ["Diskon 10%", "Diskon 25%", "Free Ongkir", "Bonus Produk", "Coba Lagi"];
+const segAngle = 360 / rewards.length;
+
+function drawWheel() {
+  for (let i = 0; i < rewards.length; i++) {
+    ctx.beginPath();
+    ctx.fillStyle = i % 2 == 0 ? "#4ade80" : "#3b82f6";
+    ctx.moveTo(150, 150);
+    ctx.arc(150, 150, 150, (i * segAngle) * Math.PI/180, ((i + 1) * segAngle) * Math.PI/180);
+    ctx.lineTo(150, 150);
+    ctx.fill();
+    ctx.fillStyle = "white";
+    ctx.font = "14px sans-serif";
+    ctx.translate(150, 150);
+    ctx.rotate((i * segAngle + segAngle / 2) * Math.PI/180);
+    ctx.fillText(rewards[i], 60, 5);
+    ctx.rotate(-(i * segAngle + segAngle / 2) * Math.PI/180);
+    ctx.translate(-150, -150);
+  }
+}
+drawWheel();
+
+function spinWheel() {
+  const result = rewards[Math.floor(Math.random() * rewards.length)];
+  document.getElementById("reward").textContent = "🎁 Anda mendapatkan: " + result;
+}
+</script>
+<div style="position:fixed;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:20px;z-index:9999;background:#1f2937cc;padding:10px 20px;border-radius:50px;">
+<a href="#" style="color:white;" title="Home">🏠</a>
+<a href="#productSection" style="color:white;" title="Produk">🛍️</a>
+<a href="#form-pesan" style="color:white;" title="Pesan">📝</a>
+<a href="https://wa.me/6288298717014" style="color:white;" title="WA Admin">💬</a>
+</div>
+<script>
+document.querySelectorAll('.product-card img').forEach(img => {
+  const original = img.src;
+  const alt = img.getAttribute('alt') || 'produk';
+  img.addEventListener('mouseenter', () => {
+    img.src = 'https://source.unsplash.com/300x300/?' + alt + ',2';
+  });
+  img.addEventListener('mouseleave', () => {
+    img.src = original;
+  });
+});
+</script>
+<section style="text-align:center;color:white;padding:30px 20px;">
+<h3>📅 Promo Hari Ini - <span id="today-date"></span></h3>
+<p>🔥 Promo Spesial: Cashback 15% untuk Top Up &amp; Bot WhatsApp</p>
+</section>
+<script>
+const now = new Date();
+document.getElementById("today-date").textContent = now.toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+</script>
+<section data-aos="fade-up" style="color:white;padding:30px;text-align:center;">
+<h3>💬 Apa Kata Mereka?</h3>
+<div id="testimonial" style="margin-top:20px;font-style:italic;">“Pelayanan cepat dan ramah!”</div>
+</section>
+<script>
+const testiList = [
+  "“Pelayanan cepat dan ramah!”",
+  "“Website-nya bagus dan mudah dipakai.”",
+  "“Produk digital lengkap dan terpercaya.”",
+  "“Sangat membantu bisnis online saya!”"
+];
+let testiIndex = 0;
+setInterval(() => {
+  testiIndex = (testiIndex + 1) % testiList.length;
+  document.getElementById("testimonial").textContent = testiList[testiIndex];
+}, 5000);
+</script>
+<div style="position:fixed;bottom:100px;right:20px;z-index:9999;">
+<button onclick="toggleHelp()" style="background:#14b8a6;color:white;padding:10px;border:none;border-radius:6px;">🤖 Bantuan</button>
+<div id="help-options" style="display:none;margin-top:8px;background:#1f2937;padding:10px;border-radius:8px;">
+<a href="https://wa.me/6288298717014" style="color:white;display:block;">WA Admin</a>
+<a href="#faq" style="color:white;display:block;">FAQ</a>
+<a href="#form-pesan" style="color:white;display:block;">Rekomendasi</a>
+</div>
+</div>
+<script>
+function toggleHelp() {
+  const box = document.getElementById("help-options");
+  box.style.display = box.style.display === "none" ? "block" : "none";
+}
+</script>
+<section style="text-align:center;margin:60px auto;max-width:600px;">
+<h2 style="color:white;">🎥 Video Demo Produk</h2>
+<video autoplay="" controls="" loop="" muted="" style="border-radius:12px;box-shadow:0 0 16px rgba(0,0,0,0.4);margin-top:20px;" width="100%">
+<source src="https://cdn.pixabay.com/video/2022/08/18/127010-737251696_large.mp4" type="video/mp4"/>
+    Browser Anda tidak mendukung video.
+  </video>
+</section>
+<link href="manifest.json" rel="manifest"/>
+<script>
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    setTimeout(() => {
+      alert("📲 Tambahkan Acuz Store ke layar utama untuk akses cepat seperti aplikasi!");
+    }, 6000);
+  });
+</script>
+<section style="text-align:center;margin-top:60px;">
+<h3 style="color:white;">🔐 Konfirmasi Pembayaran</h3>
+<input id="otpInput" placeholder="Masukkan kode OTP" style="padding:10px;width:200px;text-align:center;border-radius:8px;border:none;" type="text"/>
+<br/><button onclick="submitOTP()" style="margin-top:10px;padding:10px 20px;background:#10b981;color:white;border:none;border-radius:8px;font-weight:bold;">Verifikasi</button>
+<p style="color: #38bdf8; text-align: center; font-weight: bold; margin-top: 30px;">
+  🔐 Kode OTP hari ini: <span style="color:white; background:#1e40af; padding:4px 8px; border-radius:8px;">123456</span>
+</p>
+</section>
+<script>
+  function submitOTP() {
+    const otp = document.getElementById('otpInput').value;
+    if (otp === '123456') {
+      const msg = encodeURIComponent("Halo admin, saya sudah melakukan pembayaran dan memasukkan kode OTP 123456.");
+      window.location.href = `https://wa.me/6288298717014?text=${msg}`;
+    } else {
+      alert('❌ Kode salah, silakan coba lagi.');
+    }
+  }
+</script>
+<div style="text-align:center;color:white;margin-top:30px;">
+  📦 Stok tersisa: <strong id="stockCount">8</strong>
+</div>
+<script>
+  let stok = 8;
+  const stokDisplay = document.getElementById("stockCount");
+  setInterval(() => {
+    stok = Math.max(0, stok - Math.floor(Math.random() * 2));
+    stokDisplay.textContent = stok;
+  }, 7000);
+</script>
+<section style="margin:60px auto;text-align:center;">
+<h3 style="color:white;">🛒 Produk Populer</h3>
+<div style="overflow:hidden;max-width:90%;margin:auto;">
+<div id="carousel" style="display:flex;gap:20px;transition:transform 1s ease;">
+<img src="https://via.placeholder.com/150x150?text=Produk+1" style="border-radius:8px;"/>
+<img src="https://via.placeholder.com/150x150?text=Produk+2" style="border-radius:8px;"/>
+<img src="https://via.placeholder.com/150x150?text=Produk+3" style="border-radius:8px;"/>
+<img src="https://via.placeholder.com/150x150?text=Produk+4" style="border-radius:8px;"/>
+</div>
+</div>
+</section>
+<script>
+  let pos = 0;
+  setInterval(() => {
+    const track = document.getElementById("carousel");
+    pos = (pos - 170) % (170 * 4);
+    track.style.transform = `translateX(${pos}px)`;
+  }, 3000);
+</script>
+<script>
+  let views = localStorage.getItem("acuzViews") || 0;
+  views++;
+  localStorage.setItem("acuzViews", views);
+  console.log("👁️ Total kunjungan di perangkat ini:", views);
+</script>
+<section style="text-align:center;margin-top:50px;">
+<button onclick="toggleAdmin()" style="padding:10px 20px;border:none;background:#1e40af;color:white;border-radius:10px;">🧑‍💼 Masuk Mode Admin</button>
+<div id="adminPanel" style="display:none;margin-top:20px;color:white;">📊 Laporan Transaksi: Rp 12.450.000</div>
+</section>
+<script>
+  function toggleAdmin() {
+    const panel = document.getElementById("adminPanel");
+    panel.style.display = panel.style.display === "none" ? "block" : "none";
+  }
+</script>
+
+<section style="text-align:center;margin:60px auto;">
+<a href="https://bagusram555.github.io/storeacuz/metode-pembayaran.html" style="padding:16px 32px;background:#0ea5e9;color:white;font-weight:bold;border-radius:10px;
+            font-size:18px;text-decoration:none;box-shadow:0 0 10px rgba(14,165,233,0.4);" target="_blank">
+    💳 Lanjut ke Metode Pembayaran
+  </a>
+</section>
 </body>
 </html>
